@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>表单标签</title>
+</head>
+
+<body>
+    <!-- 
+    form表单:
+    action:指定表单数据提交的地址
+    method:指定表单数据提交的方式
+        get:将表单数据拼接在url后面提交 (默认方式)
+        eg:
+        /save?name=lsy&age=18
+        特点:
+        1. 不安全,因为数据暴露在url中
+        2. 数据长度有限制,一般为2048个字符
+
+        post:将表单数据封装在http请求体中提交
+        特点:
+        1. 相对安全,数据不暴露在url中
+        2. 数据长度没有限制
+    -->
+    <form action="/save" method="get">
+        姓名:<input type="text" name="name">
+        名字:<input type="text" name="age">
+        <input type="submit" value="提交">
+    </form>
+</body>
+
+</html>

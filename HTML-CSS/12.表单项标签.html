@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>表单项标签</title>
+</head>
+<body>
+    <form action="/save" method="post">
+        姓名:<input type="text" name="name"><br><br>
+
+        密码:<input type="password" name="password"><br><br>
+
+        性别:
+        <input type="radio" name="gender" value="male">男
+        <!-- 
+        <label> 标签的作用是为表单控件（如输入框、单选框）提供文字说明。
+        它是给输入框做的“文字标签”，点击文字即等同于点击控件。 
+        -->
+        <label><input type="radio" name="gender" value="female">女</label><br><br>
+
+        爱好:
+        <label><input type="checkbox" name="hobby" value="reading">阅读</label>
+        <label><input type="checkbox" name="hobby" value="sports">运动</label>
+        <label><input type="checkbox" name="hobby" value="music">音乐</label><br><br>
+
+        图像:<input type="file" name="image"><br><br>
+
+        生日:<input type="date" name="birthday"><br><br>
+
+        时间:<input type="time" name="time"><br><br>
+
+        日期时间:<input type="datetime-local" name="datetime"><br><br>
+
+        学历:
+        <select name="education">
+            <option value="none">--请选择--</option>
+            <option value="primary">小学</option>
+            <option value="middle">中学</option>
+            <option value="high">高中</option>
+            <option value="college">大学</option>
+        </select><br><br>
+
+        描述:
+        <textarea name="description" rows="10" cols="30"></textarea><br>
+
+        隐藏域:
+        <input type="hidden" name="token" value="1234567890abcdef">
+
+        <!-- 表单常见按钮 -->
+        <input type="submit" value="提交">
+        <input type="reset" value="重置">
+        <input type="button" value="按钮">
+        <br><br>
+    </form>
+</body>
+</html>
