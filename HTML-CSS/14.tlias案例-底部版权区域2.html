@@ -1,0 +1,160 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tlias智能学习辅助系统</title>
+    <style>
+        /* --- 1. 基础样式 --- */
+        body {
+            margin: 0;
+            padding: 0;
+            font-family: "Microsoft YaHei", Arial, sans-serif;
+            background-color: #f0f2f5;
+            /* 确保页面高度至少占满屏幕，让页脚能留在底部 */
+            display: flex;
+            flex-direction: column;
+            min-height: 100vh;
+        }
+
+        /* 主体内容容器，占据剩余空间 */
+        .main-content {
+            flex: 1;
+        }
+
+        /* --- 2. 第一部分：顶部导航栏 --- */
+        .top-navbar {
+            background-color: #e8e8e8;
+            height: 60px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 0 25px;
+            box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+        }
+        .system-title { font-weight: bold; font-size: 20px; color: #333; }
+        .logout-link { text-decoration: none; color: #555; font-size: 14px; transition: color 0.3s; }
+        .logout-link:hover { color: #ff4d4f; }
+
+        /* --- 3. 第二部分：搜索表单区域 --- */
+        .search-area {
+            background-color: #ffffff;
+            margin: 15px;
+            padding: 20px;
+            border-radius: 4px;
+            box-shadow: 0 1px 3px rgba(179, 23, 150, 0.1);
+        }
+        .search-form { display: flex; align-items: center; gap: 20px; flex-wrap: wrap; }
+        .form-item { display: flex; align-items: center; }
+        .form-item label { margin-right: 10px; font-size: 14px; color: #444; }
+        .form-item input, .form-item select {
+            height: 32px; padding: 0 8px; border: 1px solid #d9d9d9; border-radius: 4px; outline: none;
+        }
+        .btn-group { display: flex; gap: 10px; }
+        .btn {
+            height: 34px; padding: 0 20px; border-radius: 4px; font-size: 14px; cursor: pointer;
+            border: 1px solid transparent; transition: all 0.3s;
+        }
+        .btn-query { background-color: #1890ff; color: white; }
+        .btn-clear { background-color: #fff; border: 1px solid #d9d9d9; color: #666; }
+
+        /* --- 4. 第三部分：表格展示区 --- */
+        .table-area {
+            background-color: #ffffff;
+            margin: 15px;
+            padding: 20px;
+            border-radius: 4px;
+            box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+        }
+        table { width: 100%; border-collapse: collapse; text-align: center; }
+        thead tr { background-color: #fafafa; border-bottom: 2px solid #f0f0f0; }
+        th { padding: 12px 15px; color: #333; }
+        td { padding: 10px 15px; border-bottom: 1px solid #f0f0f0; color: #666; }
+        tbody tr:nth-child(even) { background-color: #fafafa; }
+        tbody tr:hover { background-color: #e6f7ff; }
+        .avatar { width: 40px; height: 40px; border-radius: 50%; object-fit: cover; }
+        .action-btn { background: none; border: none; cursor: pointer; font-size: 13px; margin: 0 5px; color: #1890ff; }
+        .delete-btn { color: #ff4d4f; }
+
+        /* --- 5. 第四部分：页脚版权区域样式 --- */
+        .footer {
+            background-color: #5c5c5c;      /* 灰色背景 */
+            color: #ffffff;                 /* 白色字体 */
+            padding: 25px 0;                /* 上下内边距 */
+            text-align: center;             /* 居中对齐 */
+            font-size: 14px;
+            line-height: 1.8;               /* 设置行高，让两行文字间距更舒适 */
+        }
+    </style>
+</head>
+<body>
+
+    <div class="main-content">
+        <header class="top-navbar">
+            <div class="system-title">Tlias智能学习辅助系统</div>
+            <div class="user-action">
+                <a href="#" class="logout-link">退出登录</a>
+            </div>
+        </header>
+
+        <section class="search-area">
+            <form class="search-form">
+                <div class="form-item">
+                    <label for="username">姓名</label>
+                    <input type="text" id="username" placeholder="请输入姓名">
+                </div>
+                <div class="form-item">
+                    <label for="gender">性别</label>
+                    <select id="gender">
+                        <option value="">请选择</option>
+                        <option value="1">男</option>
+                        <option value="2">女</option>
+                    </select>
+                </div>
+                <div class="form-item">
+                    <label for="job">职位</label>
+                    <select id="job">
+                        <option value="">请选择</option>
+                        <option value="1">班主任</option>
+                        <option value="2">讲师</option>
+                    </select>
+                </div>
+                <div class="btn-group">
+                    <button type="button" class="btn btn-query">查询</button>
+                    <button type="reset" class="btn btn-clear">清空</button>
+                </div>
+            </form>
+        </section>
+
+        <section class="table-area">
+            <table>
+                <thead>
+                    <tr>
+                        <th>姓名</th><th>性别</th><th>头像</th><th>职位</th><th>入职日期</th><th>最后操作时间</th><th>操作</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>令狐冲</td><td>男</td>
+                        <td><img src="https://api.dicebear.com/7.x/avataaars/svg?seed=Felix" class="avatar"></td>
+                        <td>讲师</td><td>2023-01-15</td><td>2023-10-20 14:30:05</td>
+                        <td><button class="action-btn">编辑</button><button class="action-btn delete-btn">删除</button></td>
+                    </tr>
+                    <tr>
+                        <td>任盈盈</td><td>女</td>
+                        <td><img src="https://api.dicebear.com/7.x/avataaars/svg?seed=Aneka" class="avatar"></td>
+                        <td>教研主管</td><td>2023-03-20</td><td>2023-11-05 09:15:20</td>
+                        <td><button class="action-btn">编辑</button><button class="action-btn delete-btn">删除</button></td>
+                    </tr>
+                </tbody>
+            </table>
+        </section>
+    </div>
+
+    <footer class="footer">
+        <div>江苏传智播客教育科技股份有限公司</div>
+        <div>版权所有 copyright 2006-2024 All Rights Reserved</div>
+    </footer>
+
+</body>
+</html>
