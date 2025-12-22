@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>JS-函数</title>
+</head>
+<body>
+  
+
+  <script>
+    //1. 自定义对象
+    let user = {
+      name: 'Tom',
+      age: 18,
+      gender: '男',
+      sing: function(){ 
+        alert(this.name + '悠悠的唱着最炫的民族风~')
+      }
+    }
+
+    //let user = {
+    //  name: 'Tom',
+    //  age: 18,
+    //  gender: '男',
+    //  sing(){
+    //    alert(this.name + '悠悠的唱着最炫的民族风~')
+    //  }
+    //}
+
+    // let user = {
+    //   name: 'Tom',
+    //   age: 18,
+    //   gender: '男',
+    //   sing: () => { //注意: 在箭头函数中, this并不指向当前对象 - 指向的是当前对象的父级 【不推荐】
+    //     alert(this + ':悠悠的唱着最炫的民族风~')
+    //   }
+    // }
+
+    //2. 调用对象属性/方法
+    alert(user.name);
+    user.sing();
+
+
+    //3. JSON - JS对象标记法
+    let person = {
+      name: 'itcast',
+      age: 18,
+      gender: '男'
+    }
+    alert(JSON.stringify(person)); //js对象 --> json字符串
+
+    let personJson = '{"name": "heima", "age": 18}';
+    alert(JSON.parse(personJson).name);
+
+    /* 
+    序列化 (Serialization)	    JSON.stringify()	将 JavaScript 值（对象/数组）转换成 JSON 格式的字符串。	
+    JS 对象 -> JSON 字符串	把脑中的概念，用文字写下来。
+    反序列化 (Deserialization)	JSON.parse()	    将 JSON 格式的字符串解析成等价的 JavaScript 值。	
+    JSON 字符串 -> JS 对象	把纸上的文字，在脑中还原成概念。
+ */
+  </script>
+</body>
+</html>
