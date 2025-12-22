@@ -1,11 +1,210 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="zh-CN">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>Tlias智能学习辅助系统</title>
+    <style>
+        /* --- 1. 基础样式初始化 --- */
+        body {
+            margin: 0;
+            padding: 0;
+            font-family: "Microsoft YaHei", Arial, sans-serif;
+            background-color: #3361a7;
+            /* 页面总背景色：淡灰色，更有质感 */
+        }
+
+        /* --- 2. 第一部分：顶部导航栏样式 --- */
+        .top-navbar {
+            background-color: #bc6969;
+            /* 灰色背景色 */
+            height: 60px;
+            display: flex;
+            /* 核心原理：主轴与交叉轴
+                开启 Flex 布局后，会有两个轴：
+                主轴 (Main Axis)：默认是水平方向。由 justify-content 控制（左、中、右）。
+                交叉轴 (Cross Axis)：默认是垂直方向。由 align-items 控制（上、中、下）。*/
+            justify-content: space-between;
+            /* 左右两端对齐 */
+            align-items: center;
+            /* 垂直居中 */
+            padding: 0 25px;
+            box-shadow: 0 10px 30px rgba(179, 23, 150, 0.5);
+        }
+
+        .system-title {
+            font-weight: bold;
+            /* 加粗展示 */
+            font-size: 20px;
+            color: #333;
+        }
+
+        .logout-link {
+            text-decoration: none;
+            /* 去掉超链接下划线 */
+            color: #555;
+            font-size: 14px;
+            transition: color 0.3s;
+        }
+
+        .logout-link:hover {
+            color: #ff4d4f;
+            /* 鼠标悬停变红 */
+        }
+
+        /* --- 3. 第二部分：搜索表单区域样式 --- */
+        .search-area {
+            background-color: #ffffff;
+            /* 搜索区背景设为白色，形成对比 */
+            margin: 15px;
+            /* 与边缘留出空隙 */
+            padding: 20px;
+            /* 内部留白 */
+            border-radius: 4px;
+            /* 微圆角 */
+            /* border-radius: 4px; 的作用是让原本方方正正、带尖角的盒子变得圆润，也就是我们常说的圆角 */
+        }
+
+        .search-form {
+            display: flex;
+            /* 开启 Flex 布局，实现水平排列 */
+            align-items: center;
+            /* 垂直方向对齐 */
+            gap: 20px;
+            /* 各项之间的间距 */
+            flex-wrap: wrap;
+            /* 屏幕窄时自动换行 */
+        }
+
+        /* 表单项组合 (Label + Input/Select) */
+        .form-item {
+            display: flex;
+            align-items: center;
+        }
+
+        .form-item label {
+            margin-right: 10px;
+            /* 文字与输入框的间距 */
+            font-size: 14px;
+            color: #444;
+            white-space: nowrap;
+            /* 强制文字不换行 */
+        }
+
+        .form-item input,
+        .form-item select {
+            height: 32px;
+            padding: 0 8px;
+            border: 1px solid #d9d9d9;
+            border-radius: 4px;
+            outline: none;
+            /* 
+            height: 32px,固定高度,32px 是网页设计中的“黄金高度”，既不会太厚显得笨重，也不会太薄导致点不中。
+            padding: 0 8px,内边距,重点在 8px（左右内边距）。如果没有它，你输入的文字会紧紧贴在左边框上。这 8 像素给了文字“呼吸的空间”。
+            border: 1px solid #d9d9d9,设置边框,给盒子画一圈 1 像素宽的淡灰色实线，界定出输入区域的范围。
+            border-radius:4px,微圆角,呼应你之前问到的属性，让输入框的四个角不再扎人，变得圆润专业。
+            outline:none;去除外轮廓,这是关键！ 浏览器默认在输入框被点击（获得焦点）时，会套上一个粗粗的蓝圈或黑圈。写上这一行可以去掉那个通常不太好看的默认圈。 */
+        }
+
+        /* 按钮样式 */
+        .btn-group {
+            display: flex;
+            gap: 10px;
+        }
+
+        .btn {
+            height: 34px;
+            padding: 0 20px;
+            border-radius: 4px;
+            font-size: 14px;
+            cursor: pointer;
+            /* cursor: pointer：变“小手”图标。*/
+            border: 1px solid transparent;
+            /* 透明边框，用于悬停时的边框变化 */
+            /* 1. 如果不设置透明边框（错误示范）
+                假设你的按钮平时没有边框，但你希望鼠标悬停（Hover）时出现一个 1px 的蓝色边框：
+                平时：按钮宽度 100px。
+                悬停时：你加上了 1px 边框。此时按钮的总宽度变成了 100px + 1px(左) + 1px(右) = 102px。
+                结果：当你鼠标放上去的一瞬间，按钮会突然变大 2 像素。这会导致按钮旁边的元素被“顶”开，整个页面看起来闪烁、跳动了一下。
+
+                2. 设置了 border: 1px solid transparent;（专业做法）
+                这就像是提前给按钮穿了一件隐形衣：
+                平时：按钮已经有了 1px 的边框，只是因为它是 transparent（透明），你看不见它。此时按钮总宽度已经是 102px 了。
+                悬停时：你只需要把边框的颜色从“透明”改为“蓝色”。
+                结果：按钮的总宽度依然是 102px，大小完全没变。只有颜色变了，视觉效果非常平滑丝滑。 */
+            transition: all 0.3s;
+            /* 过渡动画。 */
+        }
+
+        /* 查询按钮：蓝色背景 */
+        .btn-query {
+            background-color: #1890ff;
+            color: white;
+        }
+
+        .btn-query:hover {
+            background-color: #40a9ff;
+        }
+
+        /* 清空按钮：白色背景，灰色边框 */
+        .btn-clear {
+            background-color: #fff;
+            border: 1px solid #d9d9d9;
+            color: #666;
+        }
+
+        .btn-clear:hover {
+            color: #1890ff;
+            border-color: #1890ff;
+        }
+    </style>
 </head>
+
 <body>
-    
+
+    <header class="top-navbar">
+        <div class="system-title">Tlias智能学习辅助系统</div>
+        <div class="user-action">
+            <a href="#" class="logout-link">退出登录</a>
+        </div>
+    </header>
+
+    <section class="search-area">
+        <form class="search-form">
+            <div class="form-item">
+                <label for="username">姓名</label>
+                <input type="text" id="username" name="username" placeholder="请输入姓名">
+            </div>
+
+            <div class="form-item">
+                <label for="gender">性别</label>
+                <select id="gender" name="gender">
+                    <option value="">请选择</option>
+                    <option value="male">男</option>
+                    <option value="female">女</option>
+                </select>
+            </div>
+
+            <div class="form-item">
+                <label for="job">职位</label>
+                <select id="job" name="job">
+                    <option value="">请选择</option>
+                    <option value="1">班主任</option>
+                    <option value="2">讲师</option>
+                    <option value="3">学工主管</option>
+                    <option value="4">教研主管</option>
+                    <option value="5">咨询师</option>
+                </select>
+            </div>
+
+            <div class="btn-group">
+                <button type="submit" class="btn btn-query">查询</button>
+                <button type="reset" class="btn btn-clear">清空</button>
+            </div>
+        </form>
+    </section>
+
 </body>
+
 </html>
